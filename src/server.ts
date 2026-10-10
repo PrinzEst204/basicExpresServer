@@ -27,7 +27,7 @@ app.get('/testimonial', (req: Request, res: Response) => {
 });
 
 //Motivation array and route
-const motivations: string = [
+const motivations : string[] = [
     "an unexamined life is not worth living. ",
     "Keep going, you are closer than you think.",
     "Dont give up on your dreams.",
@@ -49,6 +49,8 @@ app.post("/birthday", (req, res) => {
     const { day, month } = req.body;
 
     const today = new Date()
+    today.setHours(0,0,0,0)
+    
     const currentYear = today.getFullYear( )
 
         let birthday = new Date ( currentYear, month - 1, day )
@@ -64,7 +66,7 @@ app.post("/birthday", (req, res) => {
             birthday = new Date( currentYear + 1, month - 1, day)
         }
 
-        const difference:number = birthday - today;
+        const difference : number =  birthday.getTime() - today.getTime();
 
         const daysRemaining = Math.ceil(
             difference / (1000 * 60 * 60 * 24)
