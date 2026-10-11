@@ -40,6 +40,7 @@ app.get("/motivation", (req, res) => {
 app.post("/birthday", (req, res) => {
     const { day, month } = req.body;
     const today = new Date();
+    today.setHours(0, 0, 0, 0);
     const currentYear = today.getFullYear();
     let birthday = new Date(currentYear, month - 1, day);
     if (today.getDate() === day &&
@@ -49,7 +50,7 @@ app.post("/birthday", (req, res) => {
     if (birthday < today) {
         birthday = new Date(currentYear + 1, month - 1, day);
     }
-    const difference = birthday - today;
+    const difference = birthday.getTime() - today.getTime();
     const daysRemaining = Math.ceil(difference / (1000 * 60 * 60 * 24));
     res.send(`Your birthday is in ${daysRemaining} days!`);
 });
