@@ -2,12 +2,16 @@ import express from 'express'
 import type { Request, Response } from 'express';
 import dotenv from 'dotenv';
 
+
+
+
 // Load environment variables
 dotenv.config();
 
 // Create the Express application
 const app = express();
 const PORT: number = Number(process.env.PORT) || 3000;
+app.use(express.json())
 
 // Define a route: when someone visits the homepage, send them a greeting
 app.get('/', (req: Request, res: Response) => {
@@ -46,7 +50,7 @@ app.get("/motivation", (req, res) => {
 
 //Route for birthday, full year, month, and day.
 
-app.post("/birthday", (req, res) => {
+app.post("/birthday", (req: Request, res: Response ) => {
     const { day, month } = req.body;
 
     const today = new Date()
