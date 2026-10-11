@@ -51,7 +51,13 @@ app.get("/motivation", (req, res) => {
 //Route for birthday, full year, month, and day.
 
 app.post("/birthday", (req: Request, res: Response ) => {
-    const { day, month } = req.body;
+    const day = Number(req.body?.day)
+    const month = Number(req.body?.month)
+
+    if (!Number.isInteger(day) || !Number.isInteger(month) ||
+        day < 1 || day > 31 || month < 1 || month > 12) {
+            return res.status(400).send("Please send a valid day (1-31) and month (1-12).")
+        }
 
     const today = new Date()
     today.setHours(0,0,0,0)
