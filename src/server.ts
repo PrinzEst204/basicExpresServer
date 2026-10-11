@@ -40,7 +40,7 @@ const motivations : string[] = [
     "Consistency beats perfection."
 ];
 
-app.get("/motivation", (req, res) => {
+app.get("/motivation", (req: Request, res: Response) => {
     const randomIndex = 
     Math.floor(Math.random() *
    motivations.length);
